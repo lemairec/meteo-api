@@ -1,0 +1,33 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+<div class="container bs-docs-container">
+    <div class="panel panel-default", style="width:100%">
+        <div class="panel-heading">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{{ path('admin_api_key', {'id': 0}) }}'">{{ 'Add'|trans }}</button>
+        </div>
+        <table class="table" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>{{ 'Id'|trans }}</th>
+                    <th></th>
+                    <th>{{ 'error'|trans }}</th>
+                    <th>{{ 'description'|trans }}</th>
+                </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody>
+                {% for apikeyuse in apikeyuses %}
+                <tr>
+                    <td><a href="{{ path('admin_api_key_use', {'id': apikeyuse.id}) }}">{{apikeyuse.datetime | date("Y-m-d-H:i")}}</td>
+                    <td>{{apikeyuse.valid}}</td>
+                    <td>{{apikeyuse.my_error}}</td>
+                    <td>{{apikeyuse.url}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
