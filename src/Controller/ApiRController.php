@@ -5,16 +5,11 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
-use App\Form\UserType;
-use App\Form\ApiKeyType;
-use App\Form\ApiKeyUseType;
-use App\Form\OauthClientType;
-
-use App\Entity\OauthClient;
-use App\Entity\OAuthClientDescription;
-use App\Entity\ApiKey;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class ApiRController extends Controller
 {
@@ -23,11 +18,17 @@ class ApiRController extends Controller
      */
     public function apiRAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $path = 'Rscript --vanilla '.dirname(__DIR__)."/../r/sample.R";
+        $process = new Process($path);
+        $process->run();
 
-        $api_keys = $em->getRepository('App:ApiKey')->findAll();
-        return $this->render('apikey/apikeys.html.twig', array(
-            'api_keys' => $api_keys,
-        ));
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        echo $path;
+        echo $process->getOutput();
+        return new JsonResponse();
     }
 }
