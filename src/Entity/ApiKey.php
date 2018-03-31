@@ -15,7 +15,7 @@ class ApiKey
     /**
      * @var string
      *
-     * @ORM\Column(name="id", type="string", length=255)
+     * @ORM\Column(name="id", type="string", length=50)
      * @ORM\Id
      */
     public $id;
