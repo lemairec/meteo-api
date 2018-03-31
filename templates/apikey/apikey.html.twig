@@ -17,7 +17,7 @@
             <tbody>
                 {% for apikeyuse in apikeyuses %}
                 <tr>
-                    <td><a href="{{ path('admin_api_key_use', {'id': apikeyuse.id}) }}">{{apikeyuse.datetime | date("Y-m-d-H:i")}}</td>
+                    <td><a href="{{ path('admin_apikey_use', {'id': apikeyuse.id}) }}">{{apikeyuse.datetime | date("Y-m-d-H:i")}}</td>
                     <td>{{apikeyuse.valid}}</td>
                     <td>{{apikeyuse.my_error}}</td>
                     <td>{{apikeyuse.url}}</td>

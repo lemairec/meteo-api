@@ -52,7 +52,7 @@ class ApiKeyController extends Controller
         if ($form->isSubmitted()) {
             $em->persist($apikey);
             $em->flush();
-            return $this->redirectToRoute('admin_api_keys');
+            return $this->redirectToRoute('admin_apikeys');
         }
         return $this->render('apikey/apikey.html.twig', array(
             'form' => $form->createView(),
@@ -61,27 +61,7 @@ class ApiKeyController extends Controller
     }
 
     /**
-     * @Route("admin/apikeyuses", name="admin_api_key_uses")
-     */
-    public function apiKeyUsesAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-
-        $apikey = $request->query->get('apikey');
-        if($apikey){
-            $apikeyuses = $em->getRepository('App:ApiKeyUse')->getAllForKey($apikey);
-        } else {
-            $apikeyuses = $em->getRepository('App:ApiKeyUse')->getAll();
-        }
-
-        return $this->render('AppBundle:admin:apikeyuses.html.twig', array(
-            'apikeyuses' => $apikeyuses,
-        ));
-    }
-
-    /**
-     * @Route("admin/apikeyuse/{id}", name="admin_api_key_use")
+     * @Route("admin/apikeyuse/{id}", name="admin_apikey_use")
      */
      public function apiKeyUseAction($id, Request $request)
      {
@@ -93,7 +73,7 @@ class ApiKeyController extends Controller
          $form = $this->createForm(ApiKeyUseType::class, $apikeyuse);
          $form->handleRequest($request);
 
-         return $this->render('AppBundle::base_form.html.twig', array(
+         return $this->render('base_form.html.twig', array(
              'form' => $form->createView()
          ));
      }
