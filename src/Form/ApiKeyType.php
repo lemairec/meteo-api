@@ -19,7 +19,7 @@ class ApiKeyType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\ApiKey'
+            'data_class' => 'App\Entity\ApiKey'
         ));
     }
 

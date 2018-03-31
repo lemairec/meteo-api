@@ -54,7 +54,7 @@ class ApiKeyController extends Controller
             $em->flush();
             return $this->redirectToRoute('admin_api_keys');
         }
-        return $this->render('AppBundle:admin:apikey.html.twig', array(
+        return $this->render('apikey/apikey.html.twig', array(
             'form' => $form->createView(),
             'apikeyuses' => $apikeyuses,
         ));
